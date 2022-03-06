@@ -2,20 +2,22 @@ import { useMemo } from 'react'
 import { ProductItem } from "./ProductItem"
 
 interface SearchResultsProps {
+    totalPrice: number
     results: Array<{
         id: number
         price: number
+        priceFormatted: string
         title: string
     }>
     onAddToWishList: (id: number) => void
 }
 
-export function SearchResults({ results, onAddToWishList }: SearchResultsProps) {
-    const totalPrice = useMemo(() => {
-        results.reduce((total, product) => {
-            return total + product.price
-        }, 0)
-    }, [results])
+export function SearchResults({ totalPrice, results, onAddToWishList }: SearchResultsProps) {
+    // const totalPrice = useMemo(() => {
+    //     results.reduce((total, product) => {
+    //         return total + product.price
+    //     }, 0)
+    // }, [results])
 
     return (
         <div>
@@ -51,4 +53,9 @@ export function SearchResults({ results, onAddToWishList }: SearchResultsProps) 
  * Quando usar useMemo ?
  * 1. Cálculos Pesados
  * 2. Igualdade Referencial (quando a gente repassa aquela informação a um componente filho)
+ */
+
+/**
+ * Quando usar useCallback ?
+ * 1. Igual useMemo, só que para funções
  */
