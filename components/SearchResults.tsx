@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { ProductItem } from "./ProductItem"
 
 interface SearchResultsProps {
@@ -10,11 +11,19 @@ interface SearchResultsProps {
 
 
 export function SearchResults({ results }: SearchResultsProps) {
+    const totalPrice = useMemo(() => {
+        results.reduce((total, product) => {
+            return total + product.price
+        }, 0)
+    }, [results])
+
     return (
         <div>
+            <h2>{totalPrice}</h2>
+
             {results.map(product => {
                 return (
-                    <ProductItem product={product} />
+                    <ProductItem product={product} key={product.id} />
                 )
             })}
         </div>
@@ -33,3 +42,9 @@ export function SearchResults({ results }: SearchResultsProps) {
 * 3. Re-renders with same props
 * 4. Medium to big size
 */
+
+/**
+ * Quando usar useMemo ?
+ * 1. Cálculos Pesados
+ * 2. Igualdade Referencial (quando a gente repassa aquela informação a um componente filho)
+ */
