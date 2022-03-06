@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 
 // import { AddProductToWishlist } from './AddProductToWishlist'
 
-const AddProductToWishList = dynamic<AddProductToWishlistProps>(() => {
+const AddProductToWishlist = dynamic<AddProductToWishlistProps>(() => {
     return import('./AddProductToWishlist').then(module => module.AddProductToWishlist)
 }, {
     loading: () => <span>Carregando...</span>
